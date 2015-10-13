@@ -6,18 +6,18 @@ $(document).ready(function () {
         $("#tweet-controls").css("display", "inline-block")
 
     });
-    var maxLength = 40;
-    $(".tweet-compose").keyup(function () {
-        var length = $(this).val().length;
-        var length = maxLength - length;
-        $("#char-count").text(length);
-        if(length <= 10)
-            $("#char-count").css("color", "red");
-        if(length >= 11)
-            $("#char-count").css("color", "black");
-        if(length > maxLength)
-            $(".button").prop("disabled", true);
-        if(length <= maxLength)
-            $(".button").prop('disabled', false);
+     $('#tweet-content textarea').on('keyup', function() {
+        $('#char-count').html('140' - $('#tweet-content textarea').val().length);
+        if ($('#tweet-content textarea').val().length >= 140){
+            $('#tweet-controls .button').prop('disabled', true);
+        }
+        else {
+            $('#tweet-controls .button').prop('disabled', false);
+        }
+        if ($('#tweet-content textarea').val().length >= 130){
+            $('#char-count').css('color', 'red');
+        }
+        else {$('#char-count').css('color', 'black');
+        }
     });
 });
